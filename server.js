@@ -11,11 +11,15 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true
+const connect = mongoose.connect(process.env.MONGO_URL);
+
+connect.then(()=>{
+    console.log("CONNECTED TO DATABASE...");
 })
-.then(() => console.log('Connected to Database'))
-.catch(err => console.error('Error connecting to MongoDB:', err));
+.catch((err)=>{
+    console.log("FAILED TO CONNECT DATABASE...")
+    console.log(err);
+});
 
 
 app.set('views', path.join(__dirname, 'views'));
