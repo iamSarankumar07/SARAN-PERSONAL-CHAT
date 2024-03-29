@@ -3,7 +3,6 @@ const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
 const mongoose = require('mongoose');
-const User = require('./models/user.js');
 const Message = require('./models/message');
 require("dotenv").config();
 
@@ -21,13 +20,16 @@ connect.then(()=>{
     console.log(err);
 });
 
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
+  res.render('home');
+});
+
+app.get('/secret-chat', (req, res) => {
   res.render('chat');
 });
 
