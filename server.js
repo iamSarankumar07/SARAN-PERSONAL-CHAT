@@ -36,9 +36,9 @@ io.on('connection', async (socket) => {
 
   socket.on('login', async (username) => {
     try {
-        const user = await User.findOne({ username });
+        const user = await Message.findOne({ username });
         if (!user) {
-            const newUser = new User({ username });
+            const newUser = new Message({ username });
             await newUser.save();
         }
         socket.username = username; 
