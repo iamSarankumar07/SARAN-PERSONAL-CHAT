@@ -12,11 +12,11 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+  useNewUrlParser: true
 })
 .then(() => console.log('Connected to Database'))
 .catch(err => console.error('Error connecting to MongoDB:', err));
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
