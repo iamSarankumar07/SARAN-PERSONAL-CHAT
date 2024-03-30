@@ -2,23 +2,13 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
-const mongoose = require('mongoose');
 const Message = require('./models/message');
 require("dotenv").config();
+require("./config/mongo");
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
-
-const connect = mongoose.connect(process.env.MONGO_URL);
-
-connect.then(()=>{
-    console.log("CONNECTED TO DATABASE...");
-})
-.catch((err)=>{
-    console.log("FAILED TO CONNECT DATABASE...")
-    console.log(err);
-});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
