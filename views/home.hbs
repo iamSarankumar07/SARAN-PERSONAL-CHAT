@@ -22,6 +22,7 @@ body {
   text-align: center;
   padding: 40px;
   border-radius: 10px;
+  margin-bottom: 15%;
 }
 
 h1 {
@@ -96,7 +97,13 @@ p {
   <p>Developed by Saran Kumar</p>
   <p>Click the button below to access the secret chat room</p>
   <span class="down-arrow">&#9660;</span>
-  <a href="/secret-chat" class="secret-button">Click here for a secret chat</a>
+  <a href="/secret-chat" class="secret-button" id="secret-button">Click here for a secret chat</a>
 </div>
+<script>
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  e.returnValue = '';
+});
+</script>
 </body>
 </html>
