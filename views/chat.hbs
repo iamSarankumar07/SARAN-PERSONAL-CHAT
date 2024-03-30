@@ -100,6 +100,7 @@
         form button:hover {
             background: #8ab7e0;
         }
+
         .back-button {
     position: absolute;
     top: 0.7%;
@@ -131,20 +132,17 @@
                 padding: 8px;
             }
         }
+
     </style>
 </head>
 <body>
-        <h1>Secret Chat</h1>
-        <a href="/" class="back-button">
+    <h1>Secret Chat</h1>
+    <a href="/" class="back-button">
         <img src="https://i.postimg.cc/Ghw7c3bx/back-button-white.png" alt="Go Back">
         </a>
     <div id="container">
         <ul id="messages"></ul>
     </div>
-    <form id="loginForm">
-        <input id="usernameInput" autocomplete="off" placeholder="Enter your Username" style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; width: 70%;">
-        <button style="background: #158ffe; color: #fff; border: none; padding: 12px; border-radius: 5px; cursor: pointer;">Login</button>
-    </form>
     <form id="form" style="display:none;">
         <input id="input" autocomplete="off" placeholder="Type your message here" style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; width: 70%;">
         <button style="background: #158ffe; color: #fff; border: none; padding: 12px; border-radius: 5px; cursor: pointer;">Send</button>
@@ -154,20 +152,15 @@
     <script>
         var socket = io();
 
-        var loginForm = document.getElementById('loginForm');
-        var usernameInput = document.getElementById('usernameInput');
         var form = document.getElementById('form');
         var input = document.getElementById('input');
         var messagesList = document.getElementById('messages');
 
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (usernameInput.value) {
-                socket.emit('login', usernameInput.value); 
-                loginForm.style.display = 'none';
-                form.style.display = 'flex';
-            }
-        });
+        var username = prompt('Enter your username:');
+        if (username) {
+            socket.emit('login', username); 
+            form.style.display = 'flex';
+        }
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -207,9 +200,9 @@
         }
 
         window.addEventListener('beforeunload', function (e) {
-  e.preventDefault();
-  e.returnValue = '';
-});
+            e.preventDefault();
+            e.returnValue = '';
+        });
     </script>
 </body>
 </html>
